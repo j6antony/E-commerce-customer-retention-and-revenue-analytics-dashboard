@@ -15,7 +15,6 @@ CREATE TABLE orders (
     order_delivered_carrier_date TIMESTAMP,
     order_delivered_customer_date TIMESTAMP,
     order_estimated_delivery_date TIMESTAMP,
-    PRIMARY KEY (order_id, order_item_id),z
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
@@ -39,7 +38,7 @@ CREATE TABLE order_items (
     shipping_limit_date TIMESTAMP,
     price NUMERIC(10,2),
     freight_value NUMERIC(10,2),
-    PRIMARY KEY(order_id, payment_sequential),
+    PRIMARY KEY (order_id, order_item_id),
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
@@ -50,5 +49,6 @@ CREATE TABLE payments (
     payment_type TEXT,
     payment_installments INT,
     payment_value NUMERIC(10,2),
+    PRIMARY KEY(order_id, payment_sequential),
     FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
