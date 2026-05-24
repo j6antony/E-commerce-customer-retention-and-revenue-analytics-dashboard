@@ -29,7 +29,7 @@ SELECT
 FROM order_items oi
 JOIN products pr
     ON oi.product_id = pr.product_id
-JOIN order o
+JOIN orders o
     ON oi.order_id = o.order_id
 WHERE o.order_status = 'delivered'
 GROUP BY pr.product_category_name
@@ -39,10 +39,10 @@ LIMIT 10;
 -- 2 inner joins required
 SELECT
     c.customer_state,
-    SUM(p.payment_value) AS totat_revenue,
-    COUNT(DISTINCT o.order_id) AS totat_orders
+    SUM(p.payment_value) AS total_revenue,
+    COUNT(DISTINCT o.order_id) AS total_orders
 FROM orders o
-JOIN customer c
+JOIN customers c
     ON o.customer_id = c.customer_id
 JOIN payments p
     ON o.order_id = p.order_id
